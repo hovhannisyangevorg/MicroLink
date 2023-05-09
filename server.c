@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:04:21 by gehovhan          #+#    #+#             */
-/*   Updated: 2023/05/05 16:34:47 by gehovhan         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:06:55 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	get_pid(int sig, siginfo_t *info, void *context)
 	static int				i;
 	static unsigned char	byte;
 
-	i = 0;
-	byte = 0;
 	(void)context;
 	if (sig == SIGUSR1)
 		byte |= 1;
