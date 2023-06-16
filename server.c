@@ -42,7 +42,6 @@ void	get_pid(int sig, siginfo_t *info, void *context)
 	{
 		write(1, &byte, 1);
 		kill(info->si_pid, SIGUSR1);
-		usleep(100);
 		byte = 0;
 		i = 0;
 	}
