@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gevorg <gevorg@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:04:21 by gehovhan          #+#    #+#             */
-/*   Updated: 2023/05/09 15:06:55 by gehovhan         ###   ########.fr       */
+/*   Updated: 2023/06/16 23:38:57 by gevorg           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,37 @@ void	ft_putnbr(int n)
 	}
 }
 
-void	get_pid(int sig, siginfo_t *info, void *context)
+void	ft_print_messig(int sig, siginfo_t *info, void*)
 {
-	static int				i;
-	static unsigned char	byte;
+	static int				bit;
+	static unsigned char	byte = 0xFF;
 
-	(void)context;
 	if (sig == SIGUSR1)
-		byte |= 1;
-	if (++i == 8)
-	{
-		write(1, &byte, 1);
-		kill(info->si_pid, SIGUSR1);
-		byte = 0;
-		i = 0;
-	}
+		byte |= 128 >> bit;
 	else
-		byte <<= 1;
+		byte ^= 128 >> bit;
+	if (++bit == 8)
+	{
+		if (byte == 0)
+			kill(info->si_pid, SIGUSR1);
+		write(1, &byte, 1);
+		byte = 0xFF;
+		bit = 0;
+	}
 }
 
 int	main(void)
 {
 	struct sigaction	sa;
 
+	sa.sa_sigaction = ft_print_messig;
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = get_pid;
 	write(1, "pid: ", 5);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-	{
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
 		pause();
-	}
 	return (0);
 }
