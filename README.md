@@ -43,7 +43,5 @@
   </ul>
   <h2>Contributing</h2>
   <p>Contributions to the Minitalk project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.</p>
-  <h2>License</h2>
-  <p>The Minitalk project is open-source software licensed under the <a href="LICENSE">MIT license</a>. Feel free to use, modify, and distribute the code as per the terms of the license.</p>
 </body>
 </html>
