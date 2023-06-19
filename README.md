@@ -9,7 +9,7 @@
   <h2>Installation</h2>
   <ol>
     <li>Clone the repository:</li>
-    <pre><code>git clone https://git@github.com:hovhannisyangevorg/Minitalk.git</code></pre>
+    <pre><code>git clone git@github.com:hovhannisyangevorg/Minitalk.git</code></pre>
 <li>Navigate to the project directory:</li>
 <pre><code>cd Minitalk</code></pre>
 
