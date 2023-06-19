@@ -30,11 +30,12 @@ void	ft_putnbr(int n)
 	}
 }
 
-void	ft_print_messig(int sig, siginfo_t *info, void*)
+void	ft_print_messig(int sig, siginfo_t *info, void *ptr)
 {
 	static int				bit;
 	static unsigned char	byte = 0xFF;
 
+	(void)ptr;
 	if (sig == SIGUSR1)
 		byte |= 128 >> bit;
 	else
