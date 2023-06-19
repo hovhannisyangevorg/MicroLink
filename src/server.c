@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gevorg <gevorg@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:04:21 by gehovhan          #+#    #+#             */
-/*   Updated: 2023/06/16 23:38:57 by gevorg           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:54:10 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
+#include "minitalk.h"
 
 void	ft_putnbr(int n)
 {

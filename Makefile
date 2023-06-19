@@ -1,40 +1,52 @@
-SERVER=server
-CLIENT=client
+NAME			:=	server client
+INC_DIR			:=	include
+SRC_DIR			:=	src
+OBJ_DIR			:=	obj
+OBJ_SERV_DIR	:=	obj/server
+OBJ_CLI_DIR 	:=	obj/client
 
-EXECS = $(SERVER) $(CLIENT)
 
-SERV_SRC=server.c
-CLI_SRC=client.c
-SRCDIR = .
-OBJDIR = obj
-SERV_OBJ = $(OBJDIR)/server.o
-CLI_OBJ = $(OBJDIR)/client.o
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -rf
-MK = mkdir -p
+HDRS		:=	$(wildcard $(INC_DIR)/*.h)
+SRCS		:=	$(wildcard $(SRC_DIR)/*.c)
+SERV_SRCS	:= 	$(filter-out $(SRC_DIR)/client.c, $(SRCS))
+CLI_SRCS	:= 	$(filter-out $(SRC_DIR)/server.c, $(SRCS))
+SERV_OBJS	:=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_SERV_DIR)/%.o, $(SERV_SRCS))
+CLI_OBJS	:=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_CLI_DIR)/%.o, $(CLI_SRCS))
 
-.DEFAULT_GOAL=all
+# tools
+CC 		:= cc
+CFLAGS 	:= -Wall -Wextra -Werror
+INCS 	:= -I$(INC_DIR)
+RM 		:= rm -rf
+MK		:= mkdir -p
 
-$(OBJDIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+.DEFAULT_GOAL:=all
 
-$(OBJDIR): $(SRCDIR)
+$(OBJ_SERV_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS)
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+
+$(OBJ_CLI_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS)
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+
+$(OBJ_SERV_DIR): $(SRC_DIR)
 	$(MK) $@
 
-all: $(OBJDIR) $(EXECS)
+$(OBJ_CLI_DIR): $(SRC_DIR)
+	$(MK) $@
 
-$(SERVER): $(SERV_OBJ)
-	$(CC) $(CFLAGS) -o $@ $(SERV_OBJ)
+all: $(NAME)
 
-$(CLIENT): $(CLI_OBJ)
-	$(CC) $(CFLAGS) -o $@ $(CLI_OBJ)
+server:	$(OBJ_SERV_DIR) $(SERV_OBJS)
+	$(CC) $(CFLAGS) $(INCS) -o $@ $(SERV_OBJS)
+
+client:	$(OBJ_CLI_DIR) $(CLI_OBJS)
+	$(CC) $(CFLAGS) $(INCS) -o $@ $(CLI_OBJS)
 
 clean:
-	$(RM) $(OBJDIR)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(EXECS)
+	$(RM) $(NAME)
 
 re:	fclean all
 

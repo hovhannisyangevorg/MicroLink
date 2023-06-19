@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gevorg <gevorg@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:04:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2023/06/19 14:17:51 by gevorg           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:55:27 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-
-int	ft_strlen(const char *s)
-{
-	int		i;
-
-	i = 0;
-	while (s && s[i])
-		++i;
-	return (i);
-}
+#include "minitalk.h"
 
 void	ft_send_byte(unsigned char byte, int pid)
 {
@@ -74,7 +60,7 @@ int	main(int ac, char **av)
 		exit(1);
 	}
 	signal(SIGUSR1, ft_print_message);
-	pid = atoi(av[1]);
+	pid = ft_atoi(av[1]);
 	msg = av[2];
 	ft_msg_handler(msg, pid);
 
