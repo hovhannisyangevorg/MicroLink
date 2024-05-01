@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <h1>Minitalk</h1>
-  <p>Minitalk is a project developed as part of the curriculum at 42, a coding school. It is a client-server application that allows two processes to communicate using only signals.</p>
+  <h1>MicroLink</h1>
+  <p>MicroLink is a project developed as part of the curriculum at 42, a coding school. It is a client-server application that allows two processes to communicate using only signals.</p>
   <h2>Installation</h2>
   <ol>
     <li>Clone the repository:</li>
-    <pre><code>git clone https://github.com/hovhannisyangevorg/Minitalk.git</code></pre>
+    <pre><code>git clone https://github.com/hovhannisyangevorg/MicroLink.git</code></pre>
 <li>Navigate to the project directory:</li>
-<pre><code>cd Minitalk</code></pre>
+<pre><code>cd MicroLink</code></pre>
 
 <li>Compile the server:</li>
 <pre><code>make server</code></pre>
@@ -34,7 +34,7 @@
 <li>You can send multiple messages by running the client again with different messages.</li>
   </ol>
   <h2>Project Structure</h2>
-  <p>The Minitalk project consists of the following files:</p>
+  <p>The MicroLink project consists of the following files:</p>
   <ul>
     <li><code>src/server.c</code>: Contains the implementation of the server.</li>
     <li><code>src/client.c</code>: Contains the implementation of the client.</li>
